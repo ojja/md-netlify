@@ -11,6 +11,7 @@ const baseConfig =
 /** @type {import('@remix-run/dev').AppConfig} */
 module.exports = {
   ...baseConfig,
+  serverDependenciesToBundle: ['nanostores', '@nanostores/persistent', '@nanostores/react'],
   ignoredRouteFiles: ["**/.*"],
   // See https://remix.run/docs/en/main/file-conventions/route-files-v2
   future: {

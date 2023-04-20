@@ -7,6 +7,8 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
+import Footer from "./layouts/footer";
+import NavBar from "./layouts/navbar";
 import styles from './tailwind.css';
 import stylesRtl from './tailwind.rtl.css';
 
@@ -27,12 +29,45 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body>
-        <Outlet />
+      <body className="box-border oultine-none">
+        <NavBar
+          // onLangChange={handleLangChange}
+        />
+        <main className="relative z-10">
+          <Outlet />
+        </main>
+        <Footer />
         <ScrollRestoration />
         <Scripts />
-        <LiveReload />
+        {process.env.NODE_ENV === 'development' ? <LiveReload /> : null}
       </body>
     </html>
   );
+}
+
+
+// const error: string = "Error message";
+interface Props {
+  error: Error | null
+}
+export function ErrorBoundary({ error }: Props) {
+  // debugger;
+  console.error(error);
+  if (error) {
+    return (
+      <html>
+        <head>
+          <title>Oh no!</title>
+          <Meta />
+          <Links />
+        </head>
+        <body>
+          {/* add the UI you want your users to see */}
+          {/* {error} */}
+          {error.message}
+          <Scripts />
+        </body>
+      </html>
+    )
+  }
 }
